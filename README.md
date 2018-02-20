@@ -14,7 +14,8 @@ https://developers.google.com/maps
 
 
 phase 1 
--A geolocation service where from one may get the latitude and longitude if certain address is given as parameter by user (5p) -phase 1 -  -Based on the parameters given a map is displayed and on a marker, is placed on the location of the address or latitude/longitude location user specified 
+-A geolocation service where from one may get the latitude and longitude if certain address is given as parameter by user 
+-Based on the parameters given a map is displayed and on a marker, is placed on the location of the address or latitude/longitude location user specified 
 -There is functionality to the user to be able to change the marker type to some custom one  
 -There is functionality to the user to be able to change the marker color to some custom one  
 
