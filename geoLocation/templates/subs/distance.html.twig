@@ -4,9 +4,16 @@
     <title>distance</title>
     <style>
       #map {
-        width: 100%;
+        width: 60%;
         height: 400px;
+        float: left;
       }
+      #right-panel {
+    height:400px;
+    float: right;
+    width: 40%;
+    overflow: auto;
+  }
     </style>
     <script>
     function deg2rad(deg) {
@@ -37,10 +44,18 @@
       calculatedDistance.toString();
       calculatedDistance += " km";
       document.getElementById('displacementField').innerHTML = calculatedDistance;
+
+      var directionsService = new google.maps.DirectionsService;
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 10,
         center: origCoords
       });
+
+      directionsDisplay.setMap(map);
+      directionsDisplay.setPanel(document.getElementById('right-panel'));
+         calculateAndDisplayRoute(directionsService, directionsDisplay);
       var origMarker = new google.maps.Marker({
         position: origCoords,
         map: map
@@ -49,19 +64,28 @@
         position: destCoords,
         map: map
       });
-      var polylineCoords = [
-        origCoords,
-        destCoords,
-      ];
-      var flightPath = new google.maps.Polyline({
-        path: polylineCoords,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
-        map: map
-      });
+
+
     }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        window.alert('Directions request failed due to ' + status);
+      var originFromattedAddress = (document.getElementById('originFromattedAddress').textContent);
+      var destinationFromattedAddress  = (document.getElementById('destinationFromattedAddress').textContent);
+
+
+  directionsService.route({
+    origin:  originFromattedAddress,
+    destination:destinationFromattedAddress,
+    travelMode: 'DRIVING'
+  }, function(response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+}
     </script>
   </head>
   <body>
@@ -81,8 +105,8 @@
           destinationLatitude is defined and destinationLongitude is defined and destinationFromattedAddress is defined %}
       <h1><strong>Driving distance: </strong>{{distance}}</h1>
       <h1><strong>Displacement: </strong><span id="displacementField"></span></h1>
-      <h2><strong>Origin: </strong>{{originFromattedAddress}}</h2>
-      <h2><strong>Destination: </strong>{{destinationFromattedAddress}}</h2>
+      <h2><strong>Origin: </strong><span id="originFromattedAddress">{{originFromattedAddress}}</span></h2>
+      <h2><strong>Destination: </strong><span id="destinationFromattedAddress">{{destinationFromattedAddress}}</span></h2>
       <h4>
         <strong>Longitude: </strong><span id="originLongField">{{originLongitude}}</span>
         <strong>Latitude: </strong><span id="originLatField">{{originLatitude}}</span>
@@ -93,6 +117,7 @@
       </h4>
       <br><br>
       <div id="map"></div>
+      <div id="right-panel"></div>
 
       <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4&callback=initMap">
