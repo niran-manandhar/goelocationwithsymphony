@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find on Map</title>
+    <style>
+      #map {
+        width: 100%;
+        height: 400px;
+      }
+    </style>
+    <script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <script>
+      var map, marker, coords;
+      var tempaddress,  templat,  templong;
+      function initMap() {
+        var longField = Number(document.getElementById('longField').textContent);
+        var latField  = Number(document.getElementById('latField').textContent);
+        tempaddress=document.getElementById('formatted_address').textContent;
+    templat=longField;
+    templong=latField;
+        coords = { lat: latField, lng: longField };
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: coords
+        });
+
+        marker = new google.maps.Marker({
+          position: coords,
+          map: map
+        });
+
+        }
+
+
+
+
+        var SAVEURL="http://101bits.com/blog/oamkgeoproject/add_markers.php";
+var GETURL="http://101bits.com/blog/oamkgeoproject/getmarkers.php";
+function saveLocation(){
+
+  var request = getRequestObject({
+    name:$('#address_title').val(),
+    address:tempaddress,
+    lat:templat,
+    lng:templong,
+    type:'phpmarker',
+  });
+
+  $.post(SAVEURL, request, function (result) {
+      if (result.RESULT == "SUCCESS") {
+alert("Marker saved!");
+
+}else{
+  alert("Something went wrong.");
+}
+
+
+  }, "json");
+
+}
+
+function getRequestObject(data) {
+
+    data.infoid = Math.random() * 10000000000000000 + 1;
+    return data;
+}
+
+    </script>
+  </head>
+  <body>
+    <h1>Find your location</h1>
+    <form method="get" action="/subs/custom">
+      <label>Address:</label>
+      <input id="address" type="text" name="address" placeholder="Enter the address here">
+      <br><br>
+      <input type="submit" name="submitForm" value="Submit">
+
+      {% if formatted_address is defined %}
+        <h1><strong>Formatted address: </strong><span id="formatted_address">{{formatted_address}}</span></h1>
+        <h2><strong>Longitude: </strong><span id="longField">{{longitude}}</span></h2>
+        <h2><strong>Latitude: </strong><span id="latField">{{latitude}}</span></h2>
+        <div>
+          <input type="text" placeholder="Enter location title" id="location_value"/>
+
+
+        </div>  <div>
+          <input type="file"  />Image</button>
+          <button type="button" onClick="saveLocation()" />Save Location</button>
+
+
+          </div>
+            <button type="button"/>Load User maps</button>
+        <div id="map"></div>
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4&callback=initMap">
+        </script>
+      {% endif %}
+
+    </form>
+
+  </body>
+</html>

@@ -43,6 +43,7 @@ class MainController extends Controller
          return $this->render('subs/lat_lng.html.twig');
        }
      }
+
     /**
      * @Route("/subs/distance")
      */
@@ -105,4 +106,37 @@ class MainController extends Controller
          return $this->render('subs/distance.html.twig');
        }
      }
+
+     /**
+      * @Route("/subs/custom")
+      */
+      public function custom()
+      {
+      if (isset($_GET['submitForm'])) {
+
+          $address = urlencode($_GET["address"]);
+          $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4";
+          $resp_json = file_get_contents($url);
+          $resp = json_decode($resp_json, true);
+          if ($resp['status']=='OK') {
+            $lati = isset($resp['results'][0]['geometry']['location']['lat']) ? $resp['results'][0]['geometry']['location']['lat'] : "";
+            $longi = isset($resp['results'][0]['geometry']['location']['lng']) ? $resp['results'][0]['geometry']['location']['lng'] : "";
+            $formatted_address = isset($resp['results'][0]['formatted_address']) ? $resp['results'][0]['formatted_address'] : "";
+            if ($lati && $longi && $formatted_address) {
+              return $this->render('subs/custom.html.twig', array(
+                    'longitude' => $longi, 'latitude' => $lati, 'formatted_address'=> $formatted_address
+              ));
+            } else {
+              return false;
+            }
+          }
+          else {
+            echo "<strong>ERROR: {$resp['status']}</strong>";
+            return false;
+          }
+        }
+        else {
+          return $this->render('subs/custom.html.twig');
+        }
+      }
 }

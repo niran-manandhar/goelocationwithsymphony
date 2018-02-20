@@ -19,28 +19,25 @@
           center: coords
         });
 
-        showMarker(document.getElementById("changeIconSelector").value);
+        showMarker(document.getElementById("iconselected").value);
       }
       function showMarker(icon) {
-        if (marker) {
-          marker.setMap(null);
-          marker = null;
-        }
+
         if (icon == 1) {
-          document.getElementById("changeColorSelector").disabled = true;
+          document.getElementById("colorSelected").disabled = true;
           marker = new google.maps.Marker({
             position: coords,
             map: map
           });
         }
-        else if (icon == 2) {
+        else {
           var fillColor, strokeColor;
-          document.getElementById("changeColorSelector").disabled = false;
-          if (document.getElementById("changeColorSelector").value == "Yellow") {
+          document.getElementById("colorSelected").disabled = false;
+          if (document.getElementById("colorSelected").value == "Yellow") {
             fillColor = "#FF0";
             strokeColor = "#FFD700";
           }
-          else if (document.getElementById("changeColorSelector").value == "Green") {
+          else if (document.getElementById("colorSelected").value == "Green") {
             fillColor = "#0F0";
             strokeColor = "#00D700";
           }
@@ -59,15 +56,10 @@
         }
       }
       function changeIcon() {
-        var selection=document.getElementById("iconselected").value;
-
-        if (document.getElementById("changeIconSelector").value == 1) {
-          showMarker(1);
-        }
-        else if (document.getElementById("changeIconSelector").value == 2) {
-          showMarker(2);
-        }
-      }
+      //  showMarker(2);
+      initMap();
+          //showMarker(document.getElementById("colorSelected").value );
+          }
     </script>
   </head>
   <body>
@@ -89,7 +81,7 @@
         </select>
         <br><br>
         <label for="colorSelected">Color: </label>
-        <select disabled id="colorSelected" onchange="changeColor()" name="selectCustomColor">
+        <select disabled id="colorSelected" onchange="changeIcon()" name="selectCustomColor">
           <option selected value="Yellow">Yellow</option>
           <option value="Green">Green</option>
           <option value="Black">Black</option>
