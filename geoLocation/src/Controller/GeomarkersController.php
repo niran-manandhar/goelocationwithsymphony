@@ -5,6 +5,7 @@ use App\Entity\Geomarkers;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Flex\Response;
+use App\Service\FileUploader;
 class GeomarkersController extends Controller
 {
     /**
@@ -21,13 +22,34 @@ class GeomarkersController extends Controller
 
        $loc->setLat(urlencode($_POST["latField_searched"]));
        $loc->setAddress(urlencode($_POST["address_searched"]));
-       $loc->setImage('1.jpg');
+       $loc->setImage('11.jpg');
+
+
+
+
+
 
        // tell Doctrine you want to (eventually) save the Product (no queries yet)
        $em->persist($loc);
 
        // actually executes the queries (i.e. the INSERT query)
        $em->flush();
+
+
+
+      /*upload login goes here*/
+
+
+
+
+
+
+
+
+
+
+
+
 
        $address = urlencode($_POST["address_searched"]);
        $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4";

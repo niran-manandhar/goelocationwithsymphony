@@ -110,7 +110,7 @@
 
     </form>
     {% endif %} {% if formatted_address is defined and datasaved is not defined %}
-    <form method="post" action="/geomarkers">
+    <form method="post" action="/geomarkers" enctype="multipart/form-data">
       <div>
 
         <input id="address_searched" type="hidden" name="address_searched" value={{formatted_address}}>
@@ -127,7 +127,7 @@
  </div>
  <div class="form-group">
 <label for="Address Title">Address Image: </label>
- <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+ <input type="file" class="form-control-file" id="mapimage" name="mapimage"  aria-describedby="fileHelp">
 <small id="fileHelp" class="form-text text-muted">This image will be used as location image.</small>
 </div>
 
