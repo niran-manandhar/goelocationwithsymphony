@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Saved Maps!{% endblock %}
+
+{% block body %}
+
+
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
+
+crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+
+<div class="container">
+    <h1>List of saved maps</h1>
+
+<table class="table-bordered table">
+<thead>
+  <tr>
+     <th>Id</th>
+     <th>Title</th>
+     <th>Address</th>
+     <th>Latitude</th>
+     <th>Longitude</th>
+     <th>Image</th>
+     <th>View</th>
+   </tr>
+</thead>
+
+<tbody>
+  {% for place in location %}
+<tr>
+
+      <td>{{ place.id}}</td>
+      <td>{{place.title|replace({'+': " "})}}</td>
+      <td>{{ place.address}}</td>
+      <td>{{ place.lat}}</td>
+      <td>{{ place.lng}}</td>
+      <td><img src="http://101bits.com/blog/oamkgeoproject/images/{{ place.image}}" style="height:100px;width:100px" class="img-thumbnail"/></td>
+      <td> <a  class="btn btn-info" href="/geomarkers/show/{{place.id}}">view</a></td></tr>
+  {% endfor %}
+
+
+
+</tbody>
+</table>
+
+
+</div>
+{% endblock %}
