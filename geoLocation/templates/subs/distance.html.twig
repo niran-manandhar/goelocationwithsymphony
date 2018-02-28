@@ -15,6 +15,9 @@
     overflow: auto;
   }
     </style>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <script>
     function deg2rad(deg) {
       return deg * (Math.PI/180)
@@ -69,7 +72,7 @@
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        window.alert('Directions request failed due to ' + status);
+
       var originFromattedAddress = (document.getElementById('originFromattedAddress').textContent);
       var destinationFromattedAddress  = (document.getElementById('destinationFromattedAddress').textContent);
 
@@ -89,6 +92,7 @@
     </script>
   </head>
   <body>
+  <div class="container">
     <h1>Enter the place name to get geocoding results</h1>
     <form method="get" action="/subs/distance">
       <label>Origin name:</label>
@@ -103,7 +107,7 @@
     {% if distance is defined and
           originLatitude is defined and originLongitude is defined and originFromattedAddress is defined and
           destinationLatitude is defined and destinationLongitude is defined and destinationFromattedAddress is defined %}
-      <h1><strong>Driving distance: </strong>{{distance}}</h1>
+      <h1><strong>Driving distance: </strong>{{distance}} m</h1>
       <h1><strong>Displacement: </strong><span id="displacementField"></span></h1>
       <h2><strong>Origin: </strong><span id="originFromattedAddress">{{originFromattedAddress}}</span></h2>
       <h2><strong>Destination: </strong><span id="destinationFromattedAddress">{{destinationFromattedAddress}}</span></h2>
@@ -115,14 +119,18 @@
         <strong>Longitude: </strong><span id="destinationLongField">{{destinationLongitude}}</span>
         <strong>Latitude: </strong><span id="destinationLatField">{{destinationLatitude}}</span>
       </h4>
-      <br><br>
+      <div class="row">
       <div id="map"></div>
       <div id="right-panel"></div>
-
+</div>
+          <div class="text-right" style="margin-top:20px;margin-bottom:20px">
+          <a class="btn btn-danger" href="/">Back</a>
+          </div>
       <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4&callback=initMap">
       </script>
     {% endif %}
 
+  </div>
   </body>
 </html>

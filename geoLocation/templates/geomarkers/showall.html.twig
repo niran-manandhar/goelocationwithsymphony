@@ -34,7 +34,7 @@ crossorigin="anonymous"></script>
 
       <td>{{ place.id}}</td>
       <td>{{place.title|replace({'+': " "})}}</td>
-      <td>{{ place.address}}</td>
+      <td>{{ place.address|replace({'%2C':" "})}}</td>
       <td>{{ place.lat}}</td>
       <td>{{ place.lng}}</td>
       <td><img src="http://101bits.com/blog/oamkgeoproject/images/{{ place.image}}" style="height:100px;width:100px" class="img-thumbnail"/></td>
@@ -45,7 +45,9 @@ crossorigin="anonymous"></script>
 
 </tbody>
 </table>
-
+<div class="text-right" style="margin-top:10px">
+<a class="btn btn-danger" href="/">Back</a>
+</div>
 
 </div>
 {% endblock %}

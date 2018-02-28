@@ -8,6 +8,10 @@
         height: 400px;
       }
     </style>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <script>
       var map, marker, coords;
       function initMap() {
@@ -63,6 +67,7 @@
     </script>
   </head>
   <body>
+    <div class="container">
     <h1>Find your location</h1>
     <form method="get" action="/subs/longlat">
       <label>Address:</label>
@@ -87,12 +92,18 @@
           <option value="Black">Black</option>
         </select>
         <br><br>
-        <div id="map"></div>
+        <div class="row">
+        <div id="map" ></div>
+</div>
+        <div class="text-right" style="margin-top:20px;margin-bottom:20px">
+        <a class="btn btn-danger" href="/">Back</a>
+        </div>
         <script async defer
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4&callback=initMap">
         </script>
       {% endif %}
 
     </form>
+  </div>
   </body>
 </html>

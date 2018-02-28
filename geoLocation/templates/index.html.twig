@@ -1,97 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Simple map application with symphony</title>
-    <script
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"
 
-    crossorigin="anonymous"></script>
+<head>
+  <title>Simple map application with symphony</title>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
 
-<div class="row">
-  <div class="col">
-    <div class="card" style="width: 20rem;">
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <h2> A simple map application made with symphony and doctrine</h2>
+      </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+      <div class="col">
+        <div class=" card text-center" style="width: 20rem;margin-bottom:25px">
+          <div class="card-header">
+            Phase 1 - Geocoding
+          </div>
+          <div class="card-block">
 
-<div class="card-block">
-  <h4 class="card-title">Phase 1 - Geocoding</h4>
-  <p class="card-text">Shows location of the searched address</p>
-  <a href="/subs/longlat" class="btn btn-primary">View</a>
-</div>
-</div>
+            <p class="card-text">Shows location of the searched address</p>
+
+          </div>
+          <div class="card-footer text-muted">
+            <a href="/subs/longlat" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class=" card text-center" style="width: 20rem;margin-bottom:25px">
+          <div class="card-header">
+            Phase 2 - Distance measure
+          </div>
+          <div class="card-block">
+
+            <p class=" card-text">Shows Distace between two address</p>
+
+          </div>
+          <div class="card-footer text-muted">
+            <a href="/subs/distance" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class=" card text-center" style="width: 20rem;margin-bottom:25px">
+          <div class="card-header">
+            Phase 3 - Navigations
+          </div>
+          <div class=" card-block">
+
+            <p class=" card-text">Navigational direction</p>
+
+          </div>
+          <div class="card-footer text-muted">
+            <a href="/subs/distance" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class=" card text-center" style="width: 20rem;margin-bottom:25px">
+          <div class="card-header">
+            Phase 4 - Save Locations
+          </div>
+          <div class=" card-block">
+
+            <p class=" card-text">Allows to save a location</p>
+
+          </div>
+          <div class="card-footer text-muted">
+            <a href="/geomarkers" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class=" card text-center" style="width: 20rem;margin-bottom:25px">
+          <div class="card-header">
+            Phase 5 - Save Image
+          </div>
+          <div class="card-block">
+
+            <p class=" card-text">Allows to save a Image to a location</p>
+
+          </div>
+          <div class="card-footer text-muted">
+            <a href="/geomarkers" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class=" card text-center" style="width: 20rem;margin-bottom:25px">
+          <div class="card-header">
+            Phase 5 - View User Maps
+          </div>
+          <div class=" card-block">
+
+            <p class=" card-text">Allows to view saved maps</p>
+
+          </div>
+          <div class="card-footer text-muted">
+            <a href="/geomarkers/showall" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
   </div>
-  <div class="col">
-    <div class="card" style="width: 20rem;">
+</body>
 
-<div class="card-block">
-  <h4 class="card-title">Phase 1 - Geocoding</h4>
-  <p class="card-text">Shows location of the searched address</p>
-  <a href="/subs/longlat" class="btn btn-primary">View</a>
-</div>
-</div>
-  </div>
-  <div class="col">
-    <div class="card" style="width: 20rem;">
-
-<div class="card-block">
-  <h4 class="card-title">Phase 1 - Geocoding</h4>
-  <p class="card-text">Shows location of the searched address</p>
-  <a href="/subs/longlat" class="btn btn-primary">View</a>
-</div>
-</div>
-  </div>
-</div>
-
-
-
-<div class="card" style="width: 20rem;">
-
-  <div class="card-block">
-    <h4 class="card-title">Phase 2 - Distance measure</h4>
-    <p class="card-text">Shows Distace between two address</p>
-    <a href="/subs/distance" class="btn btn-primary">View</a>
-  </div>
-</div>
-
-<div class="card" style="width: 20rem;">
-
-  <div class="card-block">
-    <h4 class="card-title">Phase 3 - Navigations</h4>
-    <p class="card-text">Shows Distace between two address and navigational direction</p>
-    <a href="/subs/distance" class="btn btn-primary">View</a>
-  </div>
-</div>
-
-<div class="card" style="width: 20rem;">
-
-  <div class="card-block">
-    <h4 class="card-title">Phase 4 - Save Location</h4>
-    <p class="card-text">Allows to save a location</p>
-    <a href="/subs/distance" class="btn btn-primary">View</a>
-  </div>
-</div>
-
-<div class="card" style="width: 20rem;">
-
-  <div class="card-block">
-    <h4 class="card-title">Phase 5 - Save Image</h4>
-    <p class="card-text">Allows to save a Image to a location</p>
-    <a href="/subs/distance" class="btn btn-primary">View</a>
-  </div>
-</div>
-
-<div class="card" style="width: 20rem;">
-
-  <div class="card-block">
-    <h4 class="card-title">Phase 5 - View User Maps</h4>
-    <p class="card-text">Allows to view saved maps</p>
-    <a href="/geomarkers/showall" class="btn btn-primary">View</a>
-  </div>
-</div>
-
-  </div>
-  </body>
 </html>

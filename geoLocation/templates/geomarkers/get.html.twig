@@ -63,7 +63,7 @@ function getRequestObject(data) {
      Your saved location :{{location.title|replace({'+': " "})}}
     </div>
         <h2><strong>Saved Title: </strong><span id="saved_address">{{location.title|replace({'+': " "})}}</span></h2>
-        <h2><strong>Formatted address: </strong><span id="formatted_address">{{location.address}}</span></h2>
+        <h2><strong>Formatted address: </strong><span id="formatted_address">{{ location.address|replace({'%2C':" "})}}</span></h2>
         <h3><strong>Longitude: </strong><span id="longField">{{location.lng}}</span></h3>
         <h3><strong>Latitude: </strong><span id="latField">{{location.lat}}</span></h3>
         <div id="map"></div>

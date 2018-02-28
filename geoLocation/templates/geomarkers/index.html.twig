@@ -1,117 +1,152 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Find on Map</title>
-    <style>
-      #map {
-        width: 100%;
-        height: 400px;
-      }
-    </style>
-    <script
-  src="http://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-    <script>
-      var map, marker, coords;
-      var tempaddress,  templat,  templong;
-      function initMap() {
-        var longField = Number(document.getElementById('longField').textContent);
-        var latField  = Number(document.getElementById('latField').textContent);
-        tempaddress=document.getElementById('formatted_address').textContent;
-    templat=longField;
-    templong=latField;
-        coords = { lat: latField, lng: longField };
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 14,
-          center: coords
-        });
 
-        marker = new google.maps.Marker({
-          position: coords,
-          map: map
-        });
+<head>
+  <title>Find on Map</title>
+  <style>
+    #map {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+  <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+
+  <script>
+    var map, marker, coords;
+    var tempaddress, templat, templong;
+
+    function initMap() {
+      var longField = Number(document.getElementById('longField').textContent);
+      var latField = Number(document.getElementById('latField').textContent);
+      tempaddress = document.getElementById('formatted_address').textContent;
+      templat = longField;
+      templong = latField;
+      coords = {
+        lat: latField,
+        lng: longField
+      };
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: coords
+      });
+
+      marker = new google.maps.Marker({
+        position: coords,
+        map: map
+      });
+
+    }
+
+
+
+
+    var SAVEURL = "http://101bits.com/blog/oamkgeoproject/add_markers.php";
+    var GETURL = "http://101bits.com/blog/oamkgeoproject/getmarkers.php";
+
+    function saveLocation() {
+
+      var request = getRequestObject({
+        name: $('#address_title').val(),
+        address: tempaddress,
+        lat: templat,
+        lng: templong,
+        type: 'phpmarker',
+      });
+
+      $.post(SAVEURL, request, function(result) {
+        if (result.RESULT == "SUCCESS") {
+          alert("Marker saved!");
+
+        } else {
+          alert("Something went wrong.");
         }
 
 
+      }, "json");
 
+    }
 
-var SAVEURL="http://101bits.com/blog/oamkgeoproject/add_markers.php";
-var GETURL="http://101bits.com/blog/oamkgeoproject/getmarkers.php";
-function saveLocation(){
+    function getRequestObject(data) {
 
-  var request = getRequestObject({
-    name:$('#address_title').val(),
-    address:tempaddress,
-    lat:templat,
-    lng:templong,
-    type:'phpmarker',
-  });
+      data.infoid = Math.random() * 10000000000000000 + 1;
+      return data;
+    }
+  </script>
+</head>
 
-  $.post(SAVEURL, request, function (result) {
-      if (result.RESULT == "SUCCESS") {
-alert("Marker saved!");
-
-}else{
-  alert("Something went wrong.");
-}
-
-
-  }, "json");
-
-}
-
-function getRequestObject(data) {
-
-    data.infoid = Math.random() * 10000000000000000 + 1;
-    return data;
-}
-
-    </script>
-  </head>
-  <body>
+<body>
+  <div class="container">
     <h1>Find your location</h1>
     <form method="get" action="/geomarkers">
+
+     {% if datasaved is not defined %}
       <label>Address:</label>
       <input id="address" type="text" name="address" placeholder="Enter the address here">
       <br><br>
       <input type="submit" name="submitForm" value="Submit">
-  {% if datasaved is defined %}
-<h2 style="color:red">Location saved</h2>
- {% endif %}
+{% endif %}
+       {% if datasaved is defined %}
+
+      <div class="alert alert-info">
+  Your location has been saved.
+    </div>
+
+      {% endif %}
+
+
       {% if formatted_address is defined %}
-        <h1><strong>Formatted address: </strong><span id="formatted_address">{{formatted_address}}</span></h1>
-        <h2><strong>Longitude: </strong><span id="longField">{{longitude}}</span></h2>
-        <h2><strong>Latitude: </strong><span id="latField">{{latitude}}</span></h2>
+      <div class="text-centered"><span id="formatted_address">{{formatted_address}}</span></div>
+      <h2><strong>Longitude: </strong><span id="longField">{{longitude}}</span></h2>
+      <h2><strong>Latitude: </strong><span id="latField">{{latitude}}</span></h2>
 
 
-        <div id="map"></div>
-        <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4&callback=initMap">
-        </script>
+      <div id="map"></div>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ssmB4OYp3klzfoEhQFrbIL57NbOcnK4&callback=initMap">
+      </script>
 
 
     </form>
- {% endif %}
-{% if formatted_address is defined and datasaved is not defined %}
- <form  method="post" action="/geomarkers">
- <div>
+    {% endif %} {% if formatted_address is defined and datasaved is not defined %}
+    <form method="post" action="/geomarkers">
+      <div>
 
-   <input id="address_searched" type="hidden" name="address_searched" value={{formatted_address}}>
-   <input id="longField_searched" type="hidden" name="longField_searched" value={{longitude}}>
-   <input id="latField_searched" type="hidden" name="latField_searched" value={{latitude}}>
+        <input id="address_searched" type="hidden" name="address_searched" value={{formatted_address}}>
+        <input id="longField_searched" type="hidden" name="longField_searched" value={{longitude}}>
+        <input id="latField_searched" type="hidden" name="latField_searched" value={{latitude}}>
 
-   <input type="text" placeholder="Enter location title" id="location_value" name="location_value"/>
-<br>
-  <input type="file"  />Image</button>
+
+      </div>
+
+      <div class="form-group">
+   <label for="Address Title">Address Title: </label>
+   <input type="text" class="form-control" id="location_value" name="location_value"  aria-describedby="location_value" placeholder="Enter Location title">
+   <small id="location_help" class="form-text text-muted">This will be used to save location.</small>
  </div>
- <div>
+ <div class="form-group">
+<label for="Address Title">Address Image: </label>
+ <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+<small id="fileHelp" class="form-text text-muted">This image will be used as location image.</small>
+</div>
+
+      <div  class="form-group">
+  <button type="submit" class="btn btn-primary"  name="submitLocation" value="Submit">Submit</button>
 
 
- <input type="submit" name="submitLocation" value="Submit">
 
-   </div>
- </form> {% endif %}
-  </body>
+      </div>
+    </form> {% endif %}
+
+    {% if datasaved is defined %}
+
+    <div class="text-right" style="margin-top:10px">
+    <a class="btn btn-danger" href="/">Back</a>
+    </div>
+
+   {% endif %}
+</body>
+</div>
+
 </html>
