@@ -1,5 +1,5 @@
-# goelocationwithsymphony
-Symfony Framework implementation of google maps
+# Goelocationwithsymphony
+Playing with Symfony Framework implementation of google maps
 
 
 ![alt text](https://github.com/niran-manandhar/goelocationwithsymphony/blob/master/geoLocation/gif%20screenshot/gif_image.gif)
